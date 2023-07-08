@@ -641,10 +641,10 @@
     }
 
     input {
-        padding: 7px 13px;
-        border-radius: 3px;
-        border: 1px solid lightgrey;
-        font-size: 15px;
+        // padding: 7px 13px;
+        // border-radius: 3px;
+        // border: 1px solid lightgrey;
+        // font-size: 15px;
     }
 
     .travelBox {
@@ -695,24 +695,24 @@
         }
     }
     button {
-        font-family: 'Lato';
-        // padding: 10px 15px;
-        background: var(--defaultOrange);
-        color: var(--white);
-        border: none;
-        border-radius: 3px;
-        display: flex;
-        gap: 10px;
-        cursor: pointer;
-        transition: .2s all ease-in-out;
-        // text-transform: uppercase;
-        font-weight: bold;
-        font-size: 15px;
-        padding: 10px 20px;
+        // font-family: 'Lato';
+        // // padding: 10px 15px;
+        // background: var(--defaultOrange);
+        // color: var(--white);
+        // border: none;
+        // border-radius: 3px;
+        // display: flex;
+        // gap: 10px;
+        // cursor: pointer;
+        // transition: .2s all ease-in-out;
+        // // text-transform: uppercase;
+        // font-weight: bold;
+        // font-size: 15px;
+        // padding: 10px 20px;
 
-        &:hover {
-            background-color: var(--darkerOrange);
-        }
+        // &:hover {
+        //     background-color: var(--darkerOrange);
+        // }
 
         // &::after {
         //     content: '>';

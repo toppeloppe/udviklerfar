@@ -1,15 +1,22 @@
 import './../../style.scss';
 import * as React from 'react';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Autocomplete from '@mui/material/Autocomplete';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 // import { CountriesStrings } from './Util/Countries';
 // import useTravelInformation from './useTravelInformation';
 // import { ITravelInformation } from './models/ITravelInformation';
 import useCountries, { CountriesStrings } from '../../Util/useCountries';
 import { GoBack } from '../../Util/goBack';
-
+import { FaSearch } from 'react-icons/fa';
+import { Divider } from '@mui/material';
 
 export interface IForsideProps {
   onReturn: () => void
- }
+}
 
 enum Steps {
   Step1,
@@ -53,19 +60,29 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
       <div className='center fullHeight col gap30' style={{ width: "60%", margin: "0 auto", padding: "20px 30px", position: "relative", zIndex: 5, height: "calc(100vh - 40px)" }}>
         <h1 style={{ fontSize: 50, fontWeight: '700', textTransform: 'uppercase' }}>Find din næste rejse her!</h1>
         <div className='formWrapper' style={{ position: "relative" }}>
-          <input className='' type='text' placeholder='Destination' onChange={e => onDestinationSearch(e.target.value)}></input>
-          <div style={{position: "absolute"}}>
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={CountriesStrings}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Destination" />}
+          />
+          {/* <input className='' type='text' placeholder='Destination' onChange={e => onDestinationSearch(e.target.value)}></input> */}
+          {/* <div style={{position: "absolute"}}>
             {filteredDestinations.length != 0 && filteredDestinations.map(dest => {
               return <div>{dest}</div>
             })}
-          </div>
+          </div> */}
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <DatePicker label="Afrejsedato"/>
+            <DatePicker label="Hjemrejsedato"/>
+          </LocalizationProvider>
+          {/* <input className='' type='Date' placeholder='Start'></input> */}
+          {/* <input className='' type='Date' placeholder='Stop'></input> */}
 
-          <input className='' type='Date' placeholder='Start'></input>
-          <input className='' type='Date' placeholder='Stop'></input>
-
-          <button style={{ fontWeight: 'bold', fontSize: "15px", padding: "10px 20px" }}>Søg efter rejse</button>
+          <Button variant="contained">Søg efter rejse</Button>
         </div>
-        <div className='seperator' />
+        <Divider>ELLER</Divider>
         <div className='formWrapper'>
           Vælg en af disse rejser der er på tilbud:
         </div>

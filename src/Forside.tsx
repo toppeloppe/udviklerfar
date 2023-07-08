@@ -51,9 +51,9 @@ export const Forside: React.FunctionComponent<IAppProps> = (props: React.PropsWi
   // }, []);
 
   return (
-    <div className='udviklerFar'>
+    <div >
       {selectedProject == "" &&
-        <div style={{ display: "flex" }}>
+        <div className='udviklerFar'>
           <Navigation onPageChange={onPageChange} currentPage={activePage} />
           {activePage == Sider.Portfolio && <Portfolio onProjectSelect={onProjectChange} selectedProject={selectedProject} />}
           {activePage == Sider.CV && <CV></CV>}
