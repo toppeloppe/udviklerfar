@@ -8,7 +8,7 @@ export interface IGoBackProps {
 export const GoBack: React.FunctionComponent<IGoBackProps> = (props: React.PropsWithChildren<IGoBackProps>) => {
   return (
     <>
-        <div className='goBack' onClick={props.return}><FaArrowLeft /> Gå tilbage</div>
+        <div className='goBack' onClick={props.return}><FaArrowLeft /> Til Udviklerfar</div>
     </>
   );
 };

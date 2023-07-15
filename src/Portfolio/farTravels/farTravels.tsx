@@ -7,12 +7,11 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 // import { CountriesStrings } from './Util/Countries';
-// import useTravelInformation from './useTravelInformation';
-// import { ITravelInformation } from './models/ITravelInformation';
+import { ITravelInformation } from './../../Models/ITravelInformation';
 import useCountries, { CountriesStrings } from '../../Util/useCountries';
 import { GoBack } from '../../Util/goBack';
-import { FaSearch } from 'react-icons/fa';
-import { Divider } from '@mui/material';
+import { Divider, Stack } from '@mui/material';
+import moment from 'moment';
 
 export interface IForsideProps {
   onReturn: () => void
@@ -25,21 +24,21 @@ enum Steps {
   Step4,
 }
 
+
 export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.PropsWithChildren<IForsideProps>) => {
   const [steps, setSteps] = React.useState<Steps>(Steps.Step1)
   const travelBoxes = useCountries().travelBoxes;
-  const [filteredDestinations, setFilteredDestinations] = React.useState<string[]>([])
   const backgroundVideo = useCountries().background;
-  const onDestinationSearch = (query: string) => {
-    if (query === "") {
-      setFilteredDestinations([])
-      return
-    }
+  const [travelInformation, setTravelInformation] = React.useState<ITravelInformation>()
 
-    const filtered = CountriesStrings.filter((country: string) => country.toLowerCase().indexOf(query.toLowerCase()) > -1)
-    setFilteredDestinations(filtered)
+  // const UpdateTravelInformation = (info: ITravelInformation) => {
+  //   useTravelInformation(info);
+  // }
+
+  const onChangeDestination = (e: any) => {
+    const value = e.target.textContent;
+    setTravelInformation({ destination: value })
   }
-
   // const OnTravelInformationUpdate = (area: any, value: any) => {
   //   // const travelInfo: Partial<ITravelInformation> = {
   //   //   [area]: value
@@ -48,6 +47,15 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
 
   // }
 
+  const onStartDateChange = (e: any) => {
+    debugger
+    setTravelInformation({
+      ...travelInformation,
+      from: e.toDate()
+    })
+  }
+
+  const isDisabled = travelInformation ? (travelInformation?.destination == "") || (travelInformation?.from == undefined) || (travelInformation.to == undefined) : true
 
   return (
     <div className='farTravels'>
@@ -57,7 +65,7 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
 
       <div style={{ background: 'rgba(255,255,255,0.8)', opacity: ".8", position: 'absolute', width: "100%", height: "100%" }}>
       </div>
-      <div className='center fullHeight col gap30' style={{ width: "60%", margin: "0 auto", padding: "20px 30px", position: "relative", zIndex: 5, height: "calc(100vh - 40px)" }}>
+      <div className='center fullHeight col gap30' style={{ width: "60%", margin: "0 auto", padding: "20px 30px", position: "relative", zIndex: 5, height: "calc(100vh - 40px)", display: steps >= Steps.Step1 ? 'flex' : 'none' }}>
         <h1 style={{ fontSize: 50, fontWeight: '700', textTransform: 'uppercase' }}>Find din næste rejse her!</h1>
         <div className='formWrapper' style={{ position: "relative" }}>
           <Autocomplete
@@ -66,23 +74,31 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
             options={CountriesStrings}
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Destination" />}
+            onChange={(e: any) => {
+              const value = e.target.textContent;
+              setTravelInformation({ ...travelInformation, destination: value })
+            }}
           />
-          {/* <input className='' type='text' placeholder='Destination' onChange={e => onDestinationSearch(e.target.value)}></input> */}
-          {/* <div style={{position: "absolute"}}>
-            {filteredDestinations.length != 0 && filteredDestinations.map(dest => {
-              return <div>{dest}</div>
-            })}
-          </div> */}
           <LocalizationProvider dateAdapter={AdapterMoment}>
-            <DatePicker label="Afrejsedato"/>
-            <DatePicker label="Hjemrejsedato"/>
+            <DatePicker label="Afrejsedato" onChange={(e: any) => {
+              setTravelInformation({
+                ...travelInformation,
+                from: e.toDate()
+              })
+            }} />
+            <DatePicker label="Hjemrejsedato" onChange={(e: any) => {
+              setTravelInformation({
+                ...travelInformation,
+                to: e.toDate()
+              })
+            }} />
           </LocalizationProvider>
           {/* <input className='' type='Date' placeholder='Start'></input> */}
           {/* <input className='' type='Date' placeholder='Stop'></input> */}
 
-          <Button variant="contained">Søg efter rejse</Button>
+          <Button variant="contained" disabled={isDisabled} onClick={e => setSteps(Steps.Step2)}>Søg efter rejse</Button>
         </div>
-        <Divider>ELLER</Divider>
+        <Divider style={{ width: '100%' }}>ELLER</Divider>
         <div className='formWrapper'>
           Vælg en af disse rejser der er på tilbud:
         </div>
@@ -91,10 +107,17 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
         </div>
       </div>
 
-      <div style={{ display: steps == Steps.Step2 ? 'flex' : 'none' }}>
+      <div id="step2" className='center fullHeight col gap30' style={{ width: "60%", margin: "0 auto", padding: "20px 30px", position: "relative", zIndex: 5, height: "calc(100vh - 40px)",display: steps == Steps.Step2 ? 'flex' : 'none' }}>
 
-        <div className='formWrapper'>
-          <div>
+        <Stack direction={"row"} justifyContent={'center'} alignItems={'center'} width={"100%"} gap={"2rem"}>
+          <TextField label="Fra" variant="outlined" value={"Billund"}/>
+          <TextField label="Til" variant="outlined" value={travelInformation?.destination}/>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <DatePicker label="Afrejsedato" value={moment(travelInformation?.from)}/>
+            <DatePicker label="Hjemrejsedato" value={moment(travelInformation?.to)}/>
+          </LocalizationProvider>
+          <TextField type="number" label="Antal rejsende" variant="outlined" value={1}/>
+          {/* <div>
             <label>Fra</label>
             <input type='text'></input>
           </div>
@@ -113,26 +136,26 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
           <div>
             <label>Antal rejsende</label>
             <input type='text'></input>
-          </div>
-        </div>
-        <div className='formWrapper col' style={{ alignItems: "center" }}>
+          </div> */}
+        </Stack>
+        <Stack alignItems={'center'}>
 
-          <div >
+          <Stack >
             Flyrejse 1
-          </div>
-          <div>
+          </Stack>
+          <Stack>
             Flyrejse 2
-          </div>
-          <div>
+          </Stack>
+          <Stack>
             Flyrejse 3
-          </div>
-          <div>
+          </Stack>
+          <Stack>
             Flyrejse 4
-          </div>
-          <div>
+          </Stack>
+          <Stack>
             Flyrejse 5
-          </div>
-        </div>
+          </Stack>
+        </Stack>
 
       </div>
 

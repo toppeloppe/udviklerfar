@@ -51,7 +51,7 @@ export const Forside: React.FunctionComponent<IAppProps> = (props: React.PropsWi
   // }, []);
 
   return (
-    <div >
+    < >
       {selectedProject == "" &&
         <div className='udviklerFar'>
           <Navigation onPageChange={onPageChange} currentPage={activePage} />
@@ -72,6 +72,6 @@ export const Forside: React.FunctionComponent<IAppProps> = (props: React.PropsWi
         </div>
       }
       {selectedProject == "FarTravels" && <FarTravels onReturn={onReset}/>}
-    </div>
+    </>
   );
 };
