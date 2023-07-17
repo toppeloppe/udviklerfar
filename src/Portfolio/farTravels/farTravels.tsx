@@ -8,13 +8,16 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 // import { CountriesStrings } from './Util/Countries';
 import { ITravelInformation } from './../../Models/ITravelInformation';
-import useCountries, { CountriesStrings } from '../../Util/useCountries';
+import { CountriesStrings } from '../../Util/Countries';
 import { GoBack } from '../../Util/goBack';
-import { Divider, Stack } from '@mui/material';
+import { Divider, Stack, Step, Typography } from '@mui/material';
 import moment from 'moment';
+import useBackgroundVideo from '../../Util/useBackgroundVideo';
+import useTravelBoxes, { randomIntFromInterval } from '../../Util/useTravelboxes';
+import { FaArrowRight } from 'react-icons/fa';
 
 export interface IForsideProps {
-  onReturn: () => void
+  onReturn: () => void;
 }
 
 enum Steps {
@@ -27,18 +30,19 @@ enum Steps {
 
 export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.PropsWithChildren<IForsideProps>) => {
   const [steps, setSteps] = React.useState<Steps>(Steps.Step1)
-  const travelBoxes = useCountries().travelBoxes;
-  const backgroundVideo = useCountries().background;
-  const [travelInformation, setTravelInformation] = React.useState<ITravelInformation>()
+  const [backgroundVideo, loading] = useBackgroundVideo("Travel")
+  const [travelBoxes, boxesLoading] = useTravelBoxes([])
+  const [travelInformation, setTravelInformation] = React.useState<ITravelInformation>({ flyingFrom: "Billund", travelers: 1 })
+  const [flightChoices, setFlightChoices] = React.useState<any[]>([]);
 
   // const UpdateTravelInformation = (info: ITravelInformation) => {
   //   useTravelInformation(info);
   // }
 
-  const onChangeDestination = (e: any) => {
-    const value = e.target.textContent;
-    setTravelInformation({ destination: value })
-  }
+  // const onChangeDestination = (e: any) => {
+  //   const value = e.target.textContent;
+  //   setTravelInformation({ flyingDestination: value })
+  // }
   // const OnTravelInformationUpdate = (area: any, value: any) => {
   //   // const travelInfo: Partial<ITravelInformation> = {
   //   //   [area]: value
@@ -47,15 +51,78 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
 
   // }
 
-  const onStartDateChange = (e: any) => {
-    debugger
-    setTravelInformation({
-      ...travelInformation,
-      from: e.toDate()
-    })
+  React.useEffect(() => {
+
+    const step = document.querySelector(`#Step${steps + 1}`)
+    if (steps != Steps.Step1) {
+      step?.scrollIntoView({ behavior: "smooth" })
+    }
+
+  }, [steps])
+
+  React.useEffect(() => {
+    if (travelInformation.from && travelInformation.to) {
+      const choices = []
+      for (let index = 0; index < 3; index++) {
+        const dateFrom = randomDate(travelInformation.from)
+        const dateTo = randomDate(travelInformation.to)
+        const price = randomIntFromInterval(8000, 25000);
+        const totalPrice = travelInformation.travelers ? travelInformation.travelers > 0 ? travelInformation.travelers * price : price : price;
+        const flightChoice = <Stack className='flightChoice'>
+          <div className='flightInformation'>
+            <div>
+              <Typography variant='h6'>
+                {travelInformation.flyingFrom}
+              </Typography>
+              <Typography>
+                {dateFrom?.toLocaleTimeString('da-DK')}
+              </Typography>
+            </div>
+            <div>
+              <FaArrowRight />
+            </div>
+            <div>
+              <Typography variant='h6'>
+                {travelInformation.flyingDestination}
+              </Typography>
+              <Typography>
+                {dateTo?.toLocaleTimeString('da-DK')}
+              </Typography>
+            </div>
+          </div>
+          <Stack direction={'row'} gap={"1rem"}>
+            <div>
+              <Typography variant='h6'>
+                Pris:
+              </Typography>
+              <Typography>
+                {totalPrice.toLocaleString('da-DK') + " DKK"}
+              </Typography>
+            </div>
+            <Button onClick={e => setSteps(Steps.Step3)}>Vælg rejse</Button>
+          </Stack>
+        </Stack>
+        choices.push(flightChoice)
+      }
+      setFlightChoices(choices);
+    }
+  }, [travelInformation])
+
+  const randomDate = (start: Date) => {
+    const sampleDateStart = new Date(start)
+    const random = {
+      hour: Math.round(Math.random() * 24),
+      minutes: Math.round(Math.random() * 24)
+    };
+
+    sampleDateStart.setHours(random.hour)
+    sampleDateStart.setMinutes(random.minutes)
+    return sampleDateStart;
   }
 
-  const isDisabled = travelInformation ? (travelInformation?.destination == "") || (travelInformation?.from == undefined) || (travelInformation.to == undefined) : true
+
+
+  const isDisabled = travelInformation ? (travelInformation?.flyingDestination == "") || (travelInformation?.from == undefined) || (travelInformation.to == undefined) : true
 
   return (
     <div className='farTravels'>
@@ -65,7 +132,7 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
 
       <div style={{ background: 'rgba(255,255,255,0.8)', opacity: ".8", position: 'absolute', width: "100%", height: "100%" }}>
       </div>
-      <div className='center fullHeight col gap30' style={{ width: "60%", margin: "0 auto", padding: "20px 30px", position: "relative", zIndex: 5, height: "calc(100vh - 40px)", display: steps >= Steps.Step1 ? 'flex' : 'none' }}>
+      <div id='Step1' className='center fullHeight col gap30' style={{ width: "60%", margin: "0 auto", padding: "20px 30px", position: "relative", zIndex: 5, display: steps >= Steps.Step1 ? 'flex' : 'none' }}>
         <h1 style={{ fontSize: 50, fontWeight: '700', textTransform: 'uppercase' }}>Find din næste rejse her!</h1>
         <div className='formWrapper' style={{ position: "relative" }}>
           <Autocomplete
@@ -76,7 +143,7 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
             renderInput={(params) => <TextField {...params} label="Destination" />}
             onChange={(e: any) => {
               const value = e.target.textContent;
-              setTravelInformation({ ...travelInformation, destination: value })
+              setTravelInformation({ ...travelInformation, flyingDestination: value })
             }}
           />
           <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -96,91 +163,106 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
           {/* <input className='' type='Date' placeholder='Start'></input> */}
           {/* <input className='' type='Date' placeholder='Stop'></input> */}
 
-          <Button variant="contained" disabled={isDisabled} onClick={e => setSteps(Steps.Step2)}>Søg efter rejse</Button>
+          <Button variant="contained" disabled={isDisabled} onClick={e => {
+            setSteps(Steps.Step2)
+          }}>Søg efter rejse</Button>
         </div>
         <Divider style={{ width: '100%' }}>ELLER</Divider>
         <div className='formWrapper'>
           Vælg en af disse rejser der er på tilbud:
         </div>
         <div className='formWrapper'>
-          {travelBoxes}
+          {boxesLoading == "false" && travelBoxes}
         </div>
       </div>
 
-      <div id="step2" className='center fullHeight col gap30' style={{ width: "60%", margin: "0 auto", padding: "20px 30px", position: "relative", zIndex: 5, height: "calc(100vh - 40px)",display: steps == Steps.Step2 ? 'flex' : 'none' }}>
+      <div id="Step2" className='center fullHeight col gap30' style={{ width: "60%", margin: "0 auto", padding: "20px 30px", position: "relative", zIndex: 5, display: steps >= Steps.Step2 ? 'flex' : 'none' }}>
 
         <Stack direction={"row"} justifyContent={'center'} alignItems={'center'} width={"100%"} gap={"2rem"}>
-          <TextField label="Fra" variant="outlined" value={"Billund"}/>
-          <TextField label="Til" variant="outlined" value={travelInformation?.destination}/>
+          <TextField label="Fra" variant="outlined" value={travelInformation.flyingFrom} />
+          <TextField label="Til" variant="outlined" value={travelInformation?.flyingDestination} />
           <LocalizationProvider dateAdapter={AdapterMoment}>
-            <DatePicker label="Afrejsedato" value={moment(travelInformation?.from)}/>
-            <DatePicker label="Hjemrejsedato" value={moment(travelInformation?.to)}/>
+            <DatePicker label="Afrejsedato" value={moment(travelInformation?.from)} />
+            <DatePicker label="Hjemrejsedato" value={moment(travelInformation?.to)} />
           </LocalizationProvider>
-          <TextField type="number" label="Antal rejsende" variant="outlined" value={1}/>
-          {/* <div>
-            <label>Fra</label>
-            <input type='text'></input>
-          </div>
-          <div>
-            <label>Til</label>
-            <input type='text'></input>
-          </div>
-          <div>
-            <label>Afrejsedato</label>
-            <input type='date'></input>
-          </div>
-          <div>
-            <label>Hjemrejsedato</label>
-            <input type='date'></input>
-          </div>
-          <div>
-            <label>Antal rejsende</label>
-            <input type='text'></input>
-          </div> */}
+          <TextField type="number" label="Antal rejsende" variant="outlined" value={travelInformation.travelers} onChange={e => {
+            setTravelInformation({ ...travelInformation, travelers: parseInt(e.target.value) })
+          }} />
         </Stack>
-        <Stack alignItems={'center'}>
-
-          <Stack >
-            Flyrejse 1
+        <Stack alignItems={'center'} style={{ width: "100%", gap: 20 }}>
+          {flightChoices}
+          {/* <Stack className='flightChoice'>
+            <div className='flightInformation'>
+              <div>
+                <Typography variant='h6'>
+                  {travelInformation.flyingFrom}
+                </Typography>
+                <Typography>
+                  {travelInformation.from?.toLocaleTimeString('da-DK')}
+                </Typography>
+              </div>
+              <div>
+                <FaArrowRight />
+              </div>
+              <div>
+                <Typography variant='h6'>
+                  {travelInformation.flyingDestination}
+                </Typography>
+                <Typography>
+                  {travelInformation.to?.toLocaleTimeString('da-DK')}
+                </Typography>
+              </div>
+              <Typography>
+                PRICE
+              </Typography>
+            </div>
+            <Button>Vælg rejse</Button>
           </Stack>
-          <Stack>
+          <Stack className='flightChoice'>
             Flyrejse 2
           </Stack>
-          <Stack>
+          <Stack className='flightChoice'>
             Flyrejse 3
           </Stack>
-          <Stack>
+          <Stack className='flightChoice'>
             Flyrejse 4
           </Stack>
-          <Stack>
+          <Stack className='flightChoice'>
             Flyrejse 5
-          </Stack>
+          </Stack> */}
         </Stack>
 
       </div>
 
 
-      <div className='formWrapper col' style={{ display: steps == Steps.Step3 ? 'flex' : 'none' }}>
-        Dig
-        <div className='row gap'>
-          <input type="text" placeholder='Fornavn'></input>
-          <input type="text" placeholder='Efternavn'></input>
+      <Stack id="Step3" justifyContent={"center"} alignItems={"flex-start"} className='fullHeight col gap30' style={{ width: "60%", margin: "0 auto", padding: "20px 30px", position: "relative", zIndex: 5, display: steps >= Steps.Step3 ? 'flex' : 'none' }}>
+        <Typography variant='h5'>
+          Dig
+        </Typography>
+        <div className='row gap' style={{ padding: "0px 10px" }}>
+          <TextField label='Fornavn'></TextField>
+          <TextField label='Efternavn'></TextField>
         </div>
-        Adresse
-        <div className='row gap'>
+        <Typography variant='h4'>
+          Adresse
+        </Typography>
+        <div className='row gap' style={{ padding: "0px 10px" }}>
 
-          <input type="text" placeholder='Adresse'></input>
-          <input type="text" placeholder='postnr' disabled></input>
-          <input type="text" placeholder='by' disabled></input>
-        </div>
-
-        Kontakt oplysninger
-        <div className='row gap'>
-          <input type="text" placeholder='Telefon'></input>
-          <input type="text" placeholder='Email'></input>
+          <TextField label='Adresse'></TextField>
+          <TextField label='Postnr'></TextField>
+          <TextField label='By'></TextField>
         </div>
 
-      </div>
+        <Typography variant='h4'>
+          Kontakt oplysninger
+        </Typography>
+        <div className='row gap' style={{ padding: "0px 10px" }}>
+          <TextField label='Telefon'></TextField>
+          <TextField label='Email'></TextField>
+        </div>
+        <Button variant='contained' size='large' fullWidth>RESERVÉR REJSE</Button>
+
+      </Stack>
 
 
     </div>

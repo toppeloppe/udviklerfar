@@ -2,24 +2,25 @@ export interface IPortfolio {
     Title: string;
     subTitle: string;
     internalProjectName: string;
+    githubLink: string;
     tags: string[];
 }
 
 interface Tag {
     name: string,
     background: string;
-    color: string
+    color: string;
 }
 
 export const allTags: Tag[] = [
     {
         name: "React",
-        background: "grey",
+        background: "#61dbfb",
         color: "white"
     },
     {
         name: "Mui",
-        background: "teal",
+        background: "#007fff",
         color: "white"
     }
 ]

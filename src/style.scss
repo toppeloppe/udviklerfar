@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
+
+
 :root {
     --defaultBlue: #34495e;
     --lighterBlue: #91a7bc;
@@ -10,6 +12,10 @@
     --defaultOrange: orange;
     --darkerOrange: darkorange;
 
+}
+
+* {
+    box-sizing: border-box;
 }
 
 .row {
@@ -167,25 +173,6 @@ body {
         display: none;
     }
 
-    // .Navigation .navItems a::before {
-    //     content: '';
-    //     width: 0%;
-    //     height: 2px;
-    //     background-color: var(--white);
-    //     bottom: 0%;
-    //     z-index: 5;
-    //     display: flex;
-    //     position: absolute;
-    //     /* margin: 0 auto; */
-    //     justify-content: center;
-    //     align-items: center;
-    //     left: 2.5px;
-    //     transition: .2s all ease-in-out;
-    // }
-
-    // .Navigation .navItems a:hover:not(.active):not(.Highlight):before {
-    //     width: 100%;
-    // }
 
     button {
         padding: 10px 30px;
@@ -202,10 +189,6 @@ body {
         }
     }
 
-    // button:hover {
-    //     cursor: pointer;
-    //     background-color: var(--lighterBlue);
-    // }
 
     .Main {
         display: flex;
@@ -227,13 +210,6 @@ body {
         }
     }
 
-    // .Main h1 {
-    //     justify-content: center;
-    //     display: flex;
-    //     margin-bottom: 0;
-    //     margin-top: 50px;
-    //     font-size: 70px;
-    // }
 
     .Wrapper {
         margin-top: calc(var(--navHeight) * 2);
@@ -255,11 +231,6 @@ body {
         }
     }
 
-    // .Wrapper.row {
-    //     flex-direction: row;
-    //     margin: 0 auto;
-    //     margin-top: calc(var(--navHeight) * 2);
-    // }
 
     .Header {
         display: flex;
@@ -314,14 +285,18 @@ body {
         min-width: 400px;
         transition: .2s all ease-out;
     }
+
     .uddannelsesBoks {
-        .uddannelseHeader, .varighed {
+
+        .uddannelseHeader,
+        .varighed {
             color: var(--white);
-    
+
         }
+
         .beskrivelse {
             color: var(--lighterBlue);
-    
+
         }
     }
 
@@ -353,15 +328,6 @@ body {
         }
     }
 
-    // .jobBoks .varighed {
-    //     font-size: 1rem;
-    // }
-
-    // .jobBoks .beskrivelse {
-    //     padding-top: 10px;
-    //     font-size: 1rem;
-    //     color: var(--lighterBlue)
-    // }
 
     .shortDesc p {
         line-height: 1rem;
@@ -402,12 +368,6 @@ body {
         gap: 20px;
     }
 
-    // .contactLink:hover {
-    //     background: var(--lighterBlue);
-    //     border: 1px solid var(--darkerBlue);
-
-    // }
-
     .HamburgerMenu {
         display: flex;
         width: 100vw;
@@ -435,29 +395,13 @@ body {
         }
     }
 
-    // .HamburgerMenu.Visible {
-    //     display: flex;
-    //     right: 0;
-    //     width: 100vw;
-    //     background: var(--darkerBlue);
-    //     height: 100vh;
-    // }
+
 
     .closeHamburgerMenu {
         position: absolute;
         top: 20px;
         right: 20px;
     }
-
-    // .HamburgerMenu .hamburgerItems {
-    //     display: flex;
-    //     flex-direction: column;
-    //     width: 100%;
-    //     align-items: center;
-    //     justify-content: center;
-    //     text-align: center;
-    //     gap: 50px;
-    // }
 
     .ommig {
         // width: 60%;
@@ -482,7 +426,6 @@ body {
         max-width: 250px;
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
         border-radius: 10px;
-        cursor: pointer;
         text-decoration: none;
 
         &:hover img {
@@ -490,9 +433,12 @@ body {
         }
 
         .information {
-            padding: 10px 20px;
+            padding: 10px 20px 20px;
             background-color: var(--white);
             border-radius: 0px 0px 10px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
 
             .tags {
                 display: flex;
@@ -503,7 +449,7 @@ body {
                     border-radius: 5px;
                     padding: 5px 10px;
                     font-size: medium;
-                    
+
                 }
             }
         }
@@ -529,35 +475,7 @@ body {
         }
     }
 
-    // .portfolioBox:hover img {
-    //     filter: grayscale(0)
-    // }
 
-    // .portfolioBox .information {
-    //     padding: 10px 20px;
-    //     background-color: var(--white);
-    //     border-radius: 0px 0px 10px 10px;
-    // }
-
-    // .portfolioBox img {
-    //     border-radius: 10px 10px 0px 0px;
-    //     width: 100%;
-    //     filter: grayscale(1);
-    //     transition: .2s all ease-in-out;
-    // }
-
-    // .portfolioBox h4 {
-    //     margin: 0;
-    //     color: var(--darkerBlue);
-    //     /* font-size: 1.5rem; */
-    //     font-weight: 500;
-    // }
-
-    // .portfolioBox p {
-    //     font-size: 1rem;
-    //     margin-top: 0;
-    //     color: var(--defaultBlue);
-    // }
 
     @media all and (max-width: 1024px) {
 
@@ -669,6 +587,18 @@ body {
             }
         }
     }
+
+    .github {
+        background-color: var(--darkerBlue);
+        color: var(--white);
+        gap: 20px;
+        display: flex;
+        padding: 10px 20px;
+        align-items: center;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-top: 20px;
+    }
 }
 
 .farTravels {
@@ -772,6 +702,27 @@ body {
         // }
     }
 
+    .flightChoice {
+        background: white;
+        width: 100%;
+        padding: 20px 30px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .flightInformation {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 50px;
+
+        }
+    }
 
 
 
@@ -811,25 +762,6 @@ body {
             margin: 0 auto;
         }
     }
-
-    // .seperator::before {
-    //     content: '';
-    //     width: 100%;
-    //     height: 1px;
-    //     position: absolute;
-    //     display: flex;
-    //     background-color: #333;
-    //     top: 50%;
-    // }
-
-    // .seperator::after {
-    //     background: white;
-    //     content: 'ELLER';
-    //     width: fit-content;
-    //     z-index: 2;
-    //     padding: 10px;
-    //     margin: 0 auto;
-    // }
 
     .center {
         justify-content: center;

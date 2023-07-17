@@ -15,7 +15,7 @@ export const OmMig: React.FunctionComponent<IOmMigProps> = (props: React.PropsWi
         </div>
         <div className='ommigtekst' >
           <h3 className='sektionNavn' style={{ marginTop: 0, marginBottom: 0, textTransform: "uppercase" }}>Hvem er udviklerfar?</h3>
-          <p>Mit navn er Torben, jeg er 34 år og er bosat i Ikast sammen med min kone og min søn Theo på 1 år. </p>
+          <p>Mit navn er Torben, jeg er 34 år og er bosat i Ikast sammen med min kone og min søn på lidt over 1 år. </p>
           <p>Jeg bruger meget af min fritid på gaming og film og nyder også en cykeltur i ny og næ, samt spille lidt guitar når tiden er til det. </p>
           <p>Personligt er jeg er meget nede på jorden, og social smilende person, som forsøger at sprede smil hvor jeg kan</p>
           <p></p>

@@ -9,6 +9,8 @@ import { Navigation } from './Navigation';
 import { OmMig } from './Ommig/Ommig';
 import { Kontakt } from './Kontakt';
 import { FarTravels } from './Portfolio/farTravels/farTravels';
+// import useCountries from './Util/useCountries';
+import useBackgroundVideo from './Util/useBackgroundVideo';
 
 export interface IAppProps { }
 
@@ -20,14 +22,19 @@ export const Forside: React.FunctionComponent<IAppProps> = (props: React.PropsWi
   const preSelectedPage = parseInt(localStoragePage);
   const [selectedProject, setSelectedProject] = React.useState(localStorageProject || "");
   const [activePage, setActivePage] = React.useState<Sider>(preSelectedPage || Sider.Forside)
-
+  // let travelBoxes: any[] = [];
+  // let backgroundVideo: any[] = [];
+  // const backgroundVideo = useCountries().background;
+  // const travelBoxes = useCountries().travelBoxes;
+  // const [backgroundVideo, loading] = useBackgroundVideo("Travel")
   const onPageChange = (side: Sider) => {
     localStorage.setItem('activePage', side.toString())
     setActivePage(side)
   }
-  
+
   const onProjectChange = (project: string) => {
     localStorage.setItem('selectedProject', project)
+
     setSelectedProject(project)
   }
 
@@ -71,7 +78,7 @@ export const Forside: React.FunctionComponent<IAppProps> = (props: React.PropsWi
           }
         </div>
       }
-      {selectedProject == "FarTravels" && <FarTravels onReturn={onReset}/>}
+      {selectedProject == "FarTravels" && <FarTravels onReturn={onReset} />}
     </>
   );
 };

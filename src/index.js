@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { Forside } from './Forside';
 import reportWebVitals from './reportWebVitals';
+import useCountries from './Util/Countries';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 root.render(
   <React.StrictMode>
     <Forside />

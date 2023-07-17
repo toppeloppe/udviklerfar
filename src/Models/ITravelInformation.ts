@@ -1,7 +1,9 @@
 export interface ITravelInformation {
-    destination?: string,
+    flyingFrom?: string
+    flyingDestination?: string,
     from?: Date,
     to?: Date
+    travelers?: number;
 }
 
 // export interface ITravelPartial extends Partial<ITravelInformation> {}
