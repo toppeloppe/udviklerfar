@@ -10,7 +10,7 @@ import { OmMig } from './Ommig/Ommig';
 import { Kontakt } from './Kontakt';
 import { FarTravels } from './Portfolio/farTravels/farTravels';
 // import useCountries from './Util/useCountries';
-import useBackgroundVideo from './Util/useBackgroundVideo';
+import useTopImage from './Util/useTopImage';
 
 export interface IAppProps { }
 

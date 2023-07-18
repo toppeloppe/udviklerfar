@@ -49,7 +49,7 @@ const createTravelBox = (destination: any, index: number) => {
     return <Card sx={{ minWidth: 275 }} >
       <CardMedia
         component="img"
-        height="194"
+        height="150"
         image={destination.image}
       />
       <CardContent>

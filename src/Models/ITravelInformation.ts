@@ -4,6 +4,13 @@ export interface ITravelInformation {
     from?: Date,
     to?: Date
     travelers?: number;
+    firstName?: string;
+    lastName?: string;
+    Address?: string;
+    zipcode?: string;
+    city?: string;
+    phone?: string;
+    email?: string;
 }
 
 // export interface ITravelPartial extends Partial<ITravelInformation> {}

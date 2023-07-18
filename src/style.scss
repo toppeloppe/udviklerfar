@@ -9,9 +9,7 @@
     --darkerBlue: #313c46;
     --white: #fefefe;
     --navHeight: 40px;
-    --defaultOrange: orange;
-    --darkerOrange: darkorange;
-
+--travelBackground: #4682b4;
 }
 
 * {
@@ -602,7 +600,7 @@ body {
 }
 
 .farTravels {
-    background-color: var(--white);
+    background-color: var(--travelBackground);
     font-size: 15px;
     font-family: 'Lato';
     color: black;
@@ -617,11 +615,17 @@ body {
         gap: 30px;
     }
 
+
     input {
         // padding: 7px 13px;
         // border-radius: 3px;
         // border: 1px solid lightgrey;
         // font-size: 15px;
+        // font-family: 'Lato';
+        // border: 3px solid white;
+        // border-radius: 3px;
+        // outline: 0px;
+
     }
 
     .travelBox {
@@ -738,30 +742,14 @@ body {
     //     font-weight: bold;
     // }
 
-    .seperator {
-        display: flex;
-        width: 100%;
-        position: relative;
-
-        &::before {
-            content: '';
-            width: 100%;
-            height: 1px;
-            position: absolute;
-            display: flex;
-            background-color: #333;
-            top: 50%;
-        }
-
-        &::after {
-            background: white;
-            content: 'ELLER';
-            width: fit-content;
-            z-index: 2;
-            padding: 10px;
-            margin: 0 auto;
-        }
+.divider {
+    &::after {
+        border-top: thin solid rgba(255, 255, 255, 0.5);
     }
+    &::before {
+        border-top: thin solid rgba(255, 255, 255, 0.5);
+    }
+}
 
     .center {
         justify-content: center;
