@@ -9,7 +9,7 @@
     --darkerBlue: #313c46;
     --white: #fefefe;
     --navHeight: 90px;
-    --travelBackground: #4682b4;
+    --travelBackground: #afd1e1;
 }
 
 * {
@@ -32,7 +32,7 @@
 }
 
 .fullHeight {
-    height: 100vh;
+    height: 100%;
 }
 
 .gap {
@@ -106,8 +106,8 @@ body {
         height: 100%;
 
         &:not(#Forside) {
-            width: calc(100% - 200px);
-            margin-left: 200px;
+            width: calc(100% - 250px);
+            margin-left: 250px;
         }
     }
 
@@ -551,18 +551,19 @@ body {
 
 @media all and (max-width: 1024px) {
 
-    
+
     .udviklerFar {
         scroll-snap-type: none;
         scroll-snap-stop: normal;
         overflow-y: auto;
+
         .Main {
             background-repeat: no-repeat;
             background-position: center !important;
             text-align: center;
 
             padding: 20px 30px;
-            
+
             h1 {
                 font-size: 3rem;
             }
@@ -572,15 +573,16 @@ body {
             display: none;
         }
 
-        > div {
+        >div {
             height: auto;
+
             &:not(#Forside) {
                 width: 100%;
                 margin-left: 0px;
 
             }
         }
-        
+
 
         .Wrapper {
             position: relative;
@@ -590,84 +592,30 @@ body {
         .ommigBillede {
             display: none;
         }
-    
+
         .jobWrapper,
         .uddannelseWrapper {
             flex-direction: column;
             gap: 30px;
         }
-    
+
         .jobBoks,
         .uddannelsesBoks {
             max-width: 100%;
             min-width: min-content;
         }
-    
+
         .Logo {
             width: 60%;
-    
+
         }
-    
+
         .JobHeader,
         .uddannelseHeader {
             flex-direction: column;
             align-items: flex-start;
         }
     }
-
-
-    // .Wrapper {
-    //     padding: 20px 30px;
-    // }
-
-    // .Navigation {
-    //     // align-items: center;
-
-    //     // .navItems {
-    //     //     display: none;
-    //     // }
-    // }
-
-    // .Navigation .navItems {
-    //     display: none;
-    // }
-
-    // .Main {
-    //     background-position: 0% 20%;
-    //     width: calc(100% - 40px);
-    //     padding: 20px;
-    //     justify-content: flex-start;
-
-    //     p {
-    //         font-size: 1rem;
-    //         text-align: center;
-    //     }
-
-    //     h1 {
-    //         text-align: center;
-    //         font-size: 50px;
-    //     }
-    // }
-
-    // .Main p {
-    //     font-size: 1rem;
-    // }
-
-    // .Main {
-    //     width: calc(100% - 40px);
-    //     padding: 20px;
-    //     justify-content: start;
-    // }
-
-    // .Main h1 {
-    //     text-align: center;
-    //     font-size: 50px;
-    // }
-
-    // .Main p {
-    //     text-align: center;
-    //     /* max-width: calc(70%); */
-    // }
 
     .navItemsMobile {
         display: flex;
@@ -682,13 +630,59 @@ body {
         }
     }
 
-    // .ommig .ommigtekst {
-    //     width: 100%;
-    // }
+    .farTravels {
+        height: auto !important;
+        // .destination, .Hjemrejsedato, .Afrejsedato, .searchTravelDestination {
+        //     width: 97.5% !important;
+        // }
 
-    
+        #Step1 {}
 
-    
+        #Step2 {
+            .Wrapper {
+                width: 100% !important;
+            }
+        }
+
+        #Step3 {
+            .Wrapper {
+                width: 100% !important;
+            }
+        }
+
+        #Step4 {}
+
+        #Step2, #Step3, #Step4 {
+            height: 100vh !important;
+        }
+        .topImage {
+            height: 100% !important;
+            padding-top: 50px;
+        }
+
+        h2 {
+            text-align: start;
+            width: 100%;
+        }
+
+        .formWrapper {
+            flex-direction: column !important;
+            // width: 97.5% !important;
+        }
+
+        .travelBoxes {
+            width: 100% !important;
+            padding: 0px 20px 30px;
+
+
+
+            .travelBox {
+
+                // width: 97.5% !important;
+            }
+        }
+
+    }
 
 }
 
@@ -708,11 +702,97 @@ body {
 }
 
 .farTravels {
-    background-color: var(--travelBackground);
     font-size: 15px;
     font-family: 'Lato';
     color: black;
-    position: relative;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    #Step1,
+    #Step2,
+    #Step3,
+    #Step4 {
+        background-color: var(--travelBackground);
+    }
+
+    #Step1 {
+        margin: 0 auto;
+        position: relative;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        gap: 30px;
+
+        h2 {
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        .travelBoxes {
+            display: flex;
+            // padding-top: 30px;
+            flex-direction: column;
+            gap: 30px;
+
+
+            >div:not(.formWrapper) {
+                text-align: center;
+            }
+        }
+    }
+
+    #Step2 {
+        position: relative;
+        height: 100%;
+        margin: 0 auto;
+        padding: 20px 30px;
+        position: relative;
+        z-index: 5;
+        align-items: center;
+        justify-content: center;
+
+        .Wrapper {
+            width: 60%;
+            gap: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    #Step3 {
+        height: 100%;
+        // display: flex;
+        // flex-direction: column;
+        // gap: 30px;
+        padding: 20px 30px;
+        position: relative;
+        z-index: 5;
+
+        .Wrapper {
+            margin: 0 auto;
+            width: 60%;
+            gap: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+    }
+
+    #Step4 {}
+
+    .topImage {
+        display: flex;
+        width: 100%;
+        height: 40vh;
+        background-position: center center;
+        background-size: cover;
+        background-color: rgba(255, 255, 255, 0.6);
+        background-blend-mode: color;
+        position: relative
+    }
 
     .formWrapper {
         display: flex;
@@ -724,53 +804,61 @@ body {
     }
 
 
-    .travelBox {
-        /* border: 1px solid black; */
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
-        flex: 1;
-        border-radius: 3px;
-        position: relative;
-        background-color: var(--white);
+    .travelBoxes {
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        color: black;
 
-        .info {
-            padding: 10px 20px 20px;
-        }
+        // .travelBox {
+        //     /* border: 1px solid black; */
+        //     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+        //     flex: 1;
+        //     border-radius: 3px;
+        //     position: relative;
+        //     background-color: var(--white);
 
-        .destination {
-            font-weight: bold;
-            font-size: 20px;
-        }
+        //     .info {
+        //         padding: 10px 20px 20px;
+        //     }
 
-        .price,
-        .oldPrice {
-            color: #9d9d9d;
-            font-size: 15px;
-        }
+        //     .destination {
+        //         font-weight: bold;
+        //         font-size: 20px;
+        //     }
 
-        .oldPrice {
-            text-decoration: line-through;
-            font-size: 13px;
-        }
+        //     .price,
+        //     .oldPrice {
+        //         color: #9d9d9d;
+        //         font-size: 15px;
+        //     }
 
-        .discount {
-            color: #9d9d9d;
-            font-size: 15px;
-            background-color: aquamarine;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            border-radius: 50%;
-            color: black;
-        }
+        //     .oldPrice {
+        //         text-decoration: line-through;
+        //         font-size: 13px;
+        //     }
 
-        img {
-            width: 100%;
-            max-height: 200px;
-            border-radius: 3px 3px 0px 0px;
-        }
+        //     .discount {
+        //         color: #9d9d9d;
+        //         font-size: 15px;
+        //         background-color: aquamarine;
+        //         width: 50px;
+        //         height: 50px;
+        //         display: flex;
+        //         justify-content: center;
+        //         align-items: center;
+        //         font-weight: bold;
+        //         border-radius: 50%;
+        //         color: black;
+        //     }
+
+        //     img {
+        //         width: 100%;
+        //         max-height: 200px;
+        //         border-radius: 3px 3px 0px 0px;
+        //     }
+        // }
     }
 
     .flightChoice {
@@ -811,11 +899,11 @@ body {
 
     .divider {
         &::after {
-            border-top: thin solid rgba(255, 255, 255, 0.5);
+            border-top: thin solid rgba(0, 0, 0, 0.5);
         }
 
         &::before {
-            border-top: thin solid rgba(255, 255, 255, 0.5);
+            border-top: thin solid rgba(0, 0, 0, 0.5);
         }
     }
 
@@ -824,7 +912,4 @@ body {
         align-items: center;
     }
 
-    .fullHeight {
-        height: 100vh;
-    }
 }

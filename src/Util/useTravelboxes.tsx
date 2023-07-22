@@ -46,7 +46,7 @@ const createTravelBox = (destination: any, index: number) => {
     const oldPrice = randomIntFromInterval(8000, 35000);
     const price = oldPrice * (discount / 100);
 
-    return <Card sx={{ minWidth: 275 }} >
+    return <Card sx={{ minWidth: 275 }} className='travelBox'>
       <CardMedia
         component="img"
         height="150"

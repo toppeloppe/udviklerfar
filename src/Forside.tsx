@@ -11,6 +11,7 @@ import { Kontakt } from './Kontakt';
 import { FarTravels } from './Portfolio/farTravels/farTravels';
 // import useCountries from './Util/useCountries';
 import useTopImage from './Util/useTopImage';
+import { NavLink } from 'react-router-dom';
 
 export interface IAppProps { }
 
@@ -79,36 +80,24 @@ export const Forside: React.FunctionComponent<IAppProps> = (props: React.PropsWi
     };
   }, []);
   return (
-    < >
-      {/* {selectedProject == "" && */}
-      <div className='udviklerFar' onScroll={e => {
-      }}>
+    <>
+      <div className='udviklerFar'>
         <ul className='Navigation'>
           <li className='active'>
-            <a href='#Forside'>FORSIDE</a>
+            {/* <NavLink to={"/#Forside"}>Velkommen</NavLink> */}
+            <a href='#Forside'>Velkommen</a>
           </li>
           <li>
-            <a href='#CV'>CV</a>
+            <a href='#CV'>Cv</a>
           </li>
           <li>
             <a href='#Portfolio'>Portfolio</a>
           </li>
           <li>
-            <a href='#OmMig'>OmMig</a>
+            <a href='#OmMig'>Hvem er udviklerfar?</a>
           </li>
         </ul>
-        {/* <Navigation onPageChange={onPageChange} currentPage={activePage} />
-          {activePage == Sider.Portfolio && <Portfolio onProjectSelect={onProjectChange} selectedProject={selectedProject} />}
-          {activePage == Sider.CV && <CV></CV>}
-          {activePage == Sider.Ommig && <OmMig></OmMig>}
-          {activePage == Sider.Kontakt && <Kontakt></Kontakt>}
-          {activePage == Sider.Forside && */}
-        {/* <div style={{ height: "100%" }}> */}
-        {/* <div style={{ height: "100%" }}> */}
-        {/* </div> */}
-        {/* <Header /> */}
 
-        {/* </div> */}
         <div id="Forside" className='Main' >
 
           <div className='animate__animated animate__fadeInUp animate__delay-1s animate__slow'>
@@ -120,15 +109,13 @@ export const Forside: React.FunctionComponent<IAppProps> = (props: React.PropsWi
           <CV></CV>
         </div>
         <div id="Portfolio" className='center col' >
-          <Portfolio onProjectSelect={() => { }} selectedProject={selectedProject} />
+          <Portfolio  />
         </div>
         <div id="OmMig" className='center col' >
           <OmMig></OmMig>
         </div>
 
       </div>
-      {/* } */}
-      {/* {selectedProject == "FarTravels" && <FarTravels onReturn={onReset} />} */}
     </>
   );
 };
