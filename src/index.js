@@ -9,6 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { FarTravels } from './Portfolio/farTravels/farTravels';
+import App from './Portfolio/farCinema/App';
 // import { FarTravels } from './Portfolio/farTravels/farTravels';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/farTravels",
     element: <FarTravels />
+  },
+  {
+    path: "/farCinema",
+    element: <App />
   }
 ]);
 

@@ -4,6 +4,8 @@ export interface IPortfolio {
     internalProjectName: string;
     githubLink: string;
     tags: string[];
+    image: string;
+    inDevelopment: boolean;
 }
 
 interface Tag {

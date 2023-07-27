@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IPortfolio, allTags } from './Models/IPortfolio';
+import { IPortfolio, allTags } from '../Models/IPortfolio';
 import { FaGithub } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 export interface IPortfolioProps {
@@ -10,15 +10,28 @@ export interface IPortfolioProps {
 
 
 export const Portfolio: React.FunctionComponent<IPortfolioProps> = (props: React.PropsWithChildren<IPortfolioProps>) => {
-    const rejseBillede = require('./assets/travel.jpg');
-    const navigate = useNavigate();
+    const rejseBillede = require('./../assets/travel.jpg');
+    const biografBillede = require('./../assets/cinema.jpg')
+    // const navigate = useNavigate();
     const portFolios: IPortfolio[] = [{
         Title: "Rejse hjemmeside",
-        internalProjectName: "FarTravels",
+        internalProjectName: "farTravels",
         subTitle: "Et projekt hvor jeg har forsøgt at genskabe en hjemmeside hvor du kan booke dine egne rejser",
         githubLink: "https://github.com/toppeloppe/udviklerfar/tree/main/src/Portfolio/farTravels",
-        tags: ["React", "Mui"]
-    }]
+        tags: ["React", "Mui"],
+        image: rejseBillede,
+        inDevelopment: false
+    },
+    {
+        Title: "Biograf hjemmeside",
+        internalProjectName: "farCinema",
+        subTitle: "Har forsøgt at genskabe en biograf oplevelse, hvor sædevælgeren skulle være udfordringen",
+        githubLink: "https://github.com/toppeloppe/udviklerfar/tree/main/src/Portfolio/farCinema",
+        tags: ["React", "Mui"],
+        image: biografBillede,
+        inDevelopment: true
+    }
+]
 
     return (
         <>
@@ -33,10 +46,11 @@ export const Portfolio: React.FunctionComponent<IPortfolioProps> = (props: React
                     <br />
                     <p>God fornøjelse!</p>
                 </div>
-                {/* <h3 className='sektionNavn' style={{ marginBottom: 0, paddingBottom: 0 }}>React</h3> */}
+                <div style={{display: "flex", flexDirection: "row", gap: 20}}>
                 {portFolios.map(portfolio =>
                     <div className='portfolioBox'>
-                        <img src={rejseBillede}></img>
+                        {/* <img height={150} src={portfolio.image}></img> */}
+                        <div className={`portfolioImage ${portfolio.inDevelopment ? 'inDevelopment' : ''}`} style={{background: `url(${portfolio.image})`}} ></div>
                         <div className='information'>
 
                             <h4>{portfolio.Title}</h4>
@@ -50,18 +64,16 @@ export const Portfolio: React.FunctionComponent<IPortfolioProps> = (props: React
 
                             <p>{portfolio.subTitle}</p>
                             <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <Link to={'/farTravels'}>
+                                <Link to={`/${portfolio.internalProjectName}`}>
                                     <button >Læs mere</button>
                                 </Link>
-                                {/* <button onClick={e => props.onProjectSelect(portfolio.internalProjectName)}>Læs mere</button> */}
                                 <button onClick={e => window.location.href = portfolio.githubLink}><FaGithub /></button>
                             </div>
                         </div>
                     </div>
                 )}
-                {/* <Outlet></Outlet> */}
+                </div>
             </div>
-            {/* } */}
         </>
     );
 };

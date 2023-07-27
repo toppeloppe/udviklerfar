@@ -92,9 +92,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
-    scroll-snap-stop: always;
     overflow-y: scroll;
 
     .Logo {
@@ -103,7 +101,7 @@ body {
 
     >div {
         scroll-snap-align: center;
-        height: 100%;
+        // height: 100%;
 
         &:not(#Forside) {
             width: calc(100% - 250px);
@@ -344,8 +342,7 @@ body {
         /* box-shadow: 0 0  10px rgba(0,0,0,0.5); */
         border-radius: 5px;
         background-color: var(--darkerBlue);
-        max-width: 600px;
-        min-width: 400px;
+        width: 30%;
         transition: .2s all ease-out;
     }
 
@@ -493,6 +490,30 @@ body {
             filter: grayscale(0)
         }
 
+        .portfolioImage {
+            height: 150px;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+            &.inDevelopment {
+                background-blend-mode: color;
+                background-color: rgba(0, 0, 0, 0.5) !important;
+                &::after {
+                    content: "I UDVIKLING";
+                    display: flex;
+                    position: absolute;
+                    color: white;
+                    rotate: 5deg;
+                    width: 100%;
+                    height: 100%;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 2rem;
+                }
+
+            }
+        }
+
         .information {
             padding: 10px 20px 20px;
             background-color: var(--white);
@@ -549,6 +570,18 @@ body {
     }
 }
 
+@media all and (min-width: 1440px) and (min-height: 800px) {
+    .udviklerFar {
+        scroll-snap-type: y mandatory;
+        scroll-snap-stop: always;
+        overflow-y: scroll;
+
+        >div {
+            height: 100%;
+        }
+    }
+}
+
 @media all and (max-width: 1024px) {
 
 
@@ -601,8 +634,7 @@ body {
 
         .jobBoks,
         .uddannelsesBoks {
-            max-width: 100%;
-            min-width: min-content;
+            width: 100%;
         }
 
         .Logo {
@@ -636,7 +668,7 @@ body {
         //     width: 97.5% !important;
         // }
 
-        #Step1 {}
+        // #Step1 {}
 
         #Step2 {
             .Wrapper {
@@ -650,11 +682,14 @@ body {
             }
         }
 
-        #Step4 {}
+        // #Step4 {}
 
-        #Step2, #Step3, #Step4 {
+        #Step2,
+        #Step3,
+        #Step4 {
             height: 100vh !important;
         }
+
         .topImage {
             height: 100% !important;
             padding-top: 50px;
@@ -673,13 +708,6 @@ body {
         .travelBoxes {
             width: 100% !important;
             padding: 0px 20px 30px;
-
-
-
-            .travelBox {
-
-                // width: 97.5% !important;
-            }
         }
 
     }
@@ -781,7 +809,7 @@ body {
         }
     }
 
-    #Step4 {}
+    // #Step4 {}
 
     .topImage {
         display: flex;

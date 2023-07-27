@@ -3,7 +3,7 @@ import './style.scss';
 // import './App.css';
 import 'animate.css';
 import CV from './cv/cv';
-import { Portfolio } from './Portfolio';
+import { Portfolio } from './Portfolio/Portfolio';
 import { Sider } from './Sider';
 import { Navigation } from './Navigation';
 import { OmMig } from './Ommig/Ommig';

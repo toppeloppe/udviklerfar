@@ -10,13 +10,12 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { ITravelInformation } from './../../Models/ITravelInformation';
 import { CountriesStrings } from '../../Util/Countries';
 import { GoBack } from '../../Util/goBack';
-import { Divider, Stack, Step, Typography } from '@mui/material';
+import { CircularProgress, Divider, Stack, Typography } from '@mui/material';
 import moment from 'moment';
 import useTopImage from '../../Util/useTopImage';
 import useTravelBoxes, { randomIntFromInterval } from '../../Util/useTravelboxes';
 import { FaArrowRight, FaCheckCircle } from 'react-icons/fa';
-import { relative } from 'path';
-
+import 'moment/locale/da';
 export interface IForsideProps {
   onReturn: () => void;
 }
@@ -63,13 +62,13 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
 
   React.useEffect(() => {
     if (travelInformation.from && travelInformation.to) {
-      const choices = []
+      const choices: React.SetStateAction<any[]> = []
       for (let index = 0; index < 3; index++) {
         const dateFrom = randomDate(travelInformation.from)
         const dateTo = randomDate(travelInformation.to)
         const price = randomIntFromInterval(8000, 25000);
         const totalPrice = travelInformation.travelers ? travelInformation.travelers > 0 ? travelInformation.travelers * price : price : price;
-        const flightChoice = <Stack className='flightChoice'>
+        const flightChoice = <Stack className={`flightChoice animate__animated animate__fadeInUp animate__delay-${index}s animate__fast`}>
           <div className='flightInformation'>
             <div>
               <Typography variant='h6'>
@@ -105,7 +104,22 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
         </Stack>
         choices.push(flightChoice)
       }
-      setFlightChoices(choices);
+      setTimeout(() => {
+        setFlightChoices(choices);
+      }, 3000);
+    }
+
+    if (travelInformation.flyingDestination != undefined && travelInformation.from == undefined) {
+      // @ts-ignore
+      document.querySelector('.Afrejsedato button').click();
+    }
+    if (travelInformation.from != undefined && travelInformation.to == undefined) {
+      // @ts-ignore
+      document.querySelector('.Hjemrejsedato button').click();
+    }
+    if (travelInformation.flyingDestination != undefined && travelInformation.from != undefined && travelInformation.to != undefined) {
+      // @ts-ignore
+      document.querySelector('.searchTravelDestination')?.classList.add('animate__tada');
     }
   }, [travelInformation])
 
@@ -126,6 +140,8 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
   const step2IsDisabled = travelInformation ? (travelInformation?.flyingDestination == "") || (travelInformation?.from == undefined) || (travelInformation.to == undefined) : true
   const step3IsDisabled = travelInformation ? (travelInformation?.firstName == undefined) || (travelInformation?.lastName == undefined) || (travelInformation.Address == undefined) || (travelInformation.zipcode == undefined) || (travelInformation.email == undefined) || (travelInformation.city == undefined) || (travelInformation.phone == undefined) : true
 
+  const today = new Date();
+  const nextDay = moment(travelInformation.from).add('day', '1')
   return (
     <>
       <div className='farTravels'>
@@ -150,28 +166,30 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
                   renderInput={(params) => <TextField {...params} label="Destination" className='destination' />}
                   onChange={(e: any) => {
                     const value = e.target.textContent;
-                    setTravelInformation({ ...travelInformation, flyingDestination: value })
+                    setTravelInformation({ ...travelInformation, flyingDestination: value });
+                    
                   }}
                 />
-                <LocalizationProvider dateAdapter={AdapterMoment}>
+                <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale='da'>
                   <DatePicker label="Afrejsedato" onChange={(e: any) => {
                     setTravelInformation({
                       ...travelInformation,
                       from: e.toDate()
-                    })
-
-                  }} className='Afrejsedato' />
+                    });
+                    // @ts-ignore
+                    // document.querySelector('.Hjemrejsedato button').click();
+                  }} minDate={moment(today)} className='Afrejsedato' />
                   <DatePicker label="Hjemrejsedato" onChange={(e: any) => {
                     setTravelInformation({
                       ...travelInformation,
                       to: e.toDate()
                     })
-                  }} className='Hjemrejsedato' />
+                  }} minDate={nextDay || moment(today)} className='Hjemrejsedato' />
                 </LocalizationProvider>
                 {/* <input className='' type='Date' placeholder='Start'></input> */}
                 {/* <input className='' type='Date' placeholder='Stop'></input> */}
 
-                <Button className='searchTravelDestination' variant="contained" disabled={step2IsDisabled} onClick={e => {
+                <Button className='searchTravelDestination animate__animated' variant="contained" disabled={step2IsDisabled} onClick={e => {
                   setSteps(Steps.Step2)
                 }}>Søg efter rejse</Button>
               </div>
@@ -184,7 +202,7 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
               Vælg en af disse rejser der er på tilbud:
             </div>
             <div className='formWrapper'>
-              {boxesLoading == "false" && travelBoxes}
+              {boxesLoading == "true" ? <CircularProgress /> : travelBoxes}
             </div>
           </div>
         </div>
@@ -206,7 +224,7 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
               }} />
             </Stack>
             <Stack alignItems={'center'} style={{ width: "100%", gap: 20 }}>
-              {flightChoices}
+              {flightChoices.length == 0 ? <CircularProgress /> : flightChoices}
               {/* <Stack className='flightChoice'>
             <div className='flightInformation'>
               <div>

@@ -24,8 +24,9 @@ export default function useTravelBoxes(Destination: any) {
                     // country.index = index;
                     boxes.push(createTravelBox(country, index));
                 }
-
-                setTravelBoxes(boxes)
+                setTimeout(() => {
+                  setTravelBoxes(boxes)
+                }, 1000);
                 setLoading("false");
 
             } catch (error) {
@@ -46,7 +47,7 @@ const createTravelBox = (destination: any, index: number) => {
     const oldPrice = randomIntFromInterval(8000, 35000);
     const price = oldPrice * (discount / 100);
 
-    return <Card sx={{ minWidth: 275 }} className='travelBox'>
+    return <Card sx={{ minWidth: 275 }} className={`travelBox animate__animated animate__fadeIn animate__delay-${index}s`}>
       <CardMedia
         component="img"
         height="150"
