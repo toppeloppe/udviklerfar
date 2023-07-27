@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './global.scss'
 import './style.scss';
 // import './App.css';
 import 'animate.css';

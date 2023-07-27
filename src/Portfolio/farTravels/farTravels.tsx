@@ -1,4 +1,4 @@
-import './../../style.scss';
+import './../../global.scss';
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -16,6 +16,7 @@ import useTopImage from '../../Util/useTopImage';
 import useTravelBoxes, { randomIntFromInterval } from '../../Util/useTravelboxes';
 import { FaArrowRight, FaCheckCircle } from 'react-icons/fa';
 import 'moment/locale/da';
+import farDesign from './farTravels.module.scss'
 export interface IForsideProps {
   onReturn: () => void;
 }
@@ -52,8 +53,8 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
   // }
 
   React.useEffect(() => {
-
-    const step = document.querySelector(`#Step${steps + 1}`)
+    // const currentStep = farDesign[`Step${steps + 1}`]
+    const step = document.querySelector(`#${farDesign[`Step${steps + 1}`]}`)
     if (steps != Steps.Step1) {
       step?.scrollIntoView({ behavior: "smooth" })
     }
@@ -68,8 +69,8 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
         const dateTo = randomDate(travelInformation.to)
         const price = randomIntFromInterval(8000, 25000);
         const totalPrice = travelInformation.travelers ? travelInformation.travelers > 0 ? travelInformation.travelers * price : price : price;
-        const flightChoice = <Stack className={`flightChoice animate__animated animate__fadeInUp animate__delay-${index}s animate__fast`}>
-          <div className='flightInformation'>
+        const flightChoice = <Stack className={`${farDesign.flightChoice} animate__animated animate__fadeInUp animate__delay-${index}s animate__fast`}>
+          <div className={farDesign.flightInformation}>
             <div>
               <Typography variant='h6'>
                 {travelInformation.flyingFrom}
@@ -144,20 +145,21 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
   const nextDay = moment(travelInformation.from).add('day', '1')
   return (
     <>
-      <div className='farTravels'>
+      <div className={farDesign.Main}>
+      {/* <div className={farDesign.Main}> */}
         <GoBack return={props.onReturn} />
 
         {/* <div style={{ background: 'rgba(255,255,255,0.8)', opacity: ".8", position: 'absolute', width: "100%", height: "100%" }}>
       </div> */}
-        <div id='Step1'>
+        <div id={farDesign.Step1}>
 
-          <div className='topImage' style={{ backgroundImage: `url('${topImage}')` }}>
-            <div className='center col gap30' style={{ width: "100%", padding: "20px 30px", }}>
+          <div className={farDesign.topImage} style={{ backgroundImage: `url('${topImage}')` }}>
+            <div className={"center col gap30"} style={{ width: "100%", padding: "20px 30px", }}>
 
               <Typography variant='h2' fontWeight={"bold"} letterSpacing={"-1px"} fontFamily={"Lato"}>
                 FIND DIN NÆSTE REJSE HER
               </Typography>
-              <div className='formWrapper' style={{ position: "relative" }}>
+              <div className={farDesign.formWrapper} style={{ position: "relative" }}>
                 <Autocomplete
                   disablePortal
                   id="combo-box"
@@ -195,20 +197,20 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
               </div>
             </div>
           </div>
-          <div className='travelBoxes'>
+          <div className={farDesign.travelBoxes}>
 
-            <Divider className='divider' style={{ width: '100%' }}>ELLER</Divider>
+            <Divider className={farDesign.divider} style={{ width: '100%' }}>ELLER</Divider>
             <div>
               Vælg en af disse rejser der er på tilbud:
             </div>
-            <div className='formWrapper'>
+            <div className={farDesign.formWrapper}>
               {boxesLoading == "true" ? <CircularProgress /> : travelBoxes}
             </div>
           </div>
         </div>
 
-        <div id="Step2" style={{ display: steps >= Steps.Step2 ? 'flex' : 'none' }}>
-          <div className='Wrapper'>
+        <div id={farDesign.Step2} style={{ display: steps >= Steps.Step2 ? 'flex' : 'none' }}>
+          <div className={farDesign.Wrapper}>
             <Typography variant='h2' color={"black"} fontWeight={"bold"} letterSpacing={"-1px"} fontFamily={"Lato"}>
               VÆLG REJSE
             </Typography>
@@ -271,8 +273,8 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
 
 
 
-        <div id="Step3" style={{ display: steps >= Steps.Step3 ? 'flex' : 'none' }}>
-          <div className='Wrapper'>
+        <div id={farDesign.Step3} style={{ display: steps >= Steps.Step3 ? 'flex' : 'none' }}>
+          <div className={farDesign.Wrapper}>
 
             <Typography variant='h2' color={"black"} fontWeight={"bold"} letterSpacing={"-1px"} fontFamily={"Lato"} textTransform={"uppercase"}>
               Indtast oplysninger
@@ -289,7 +291,6 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
               <TextField onChange={e => setTravelInformation({ ...travelInformation, city: e.target.value })} name='City' label='By'></TextField>
             </div>
 
-
             <div className='row gap' style={{ padding: "0px 10px" }}>
               <TextField onChange={e => setTravelInformation({ ...travelInformation, phone: e.target.value })} label='Telefon'></TextField>
               <TextField onChange={e => setTravelInformation({ ...travelInformation, email: e.target.value })} label='Email'></TextField>
@@ -298,7 +299,7 @@ export const FarTravels: React.FunctionComponent<IForsideProps> = (props: React.
           </div>
 
         </div>
-        <Stack id="Step4" className='fullHeight col gap30 center z' style={{ zIndex: 5, position: "relative", display: steps >= Steps.Step4 ? 'flex' : 'none' }}>
+        <Stack id={farDesign.Step4} className='fullHeight col gap30 center' style={{ zIndex: 5, position: "relative", display: steps >= Steps.Step4 ? 'flex' : 'none' }}>
           <div className='col gap30 center'>
             <FaCheckCircle color='black' size={"5rem"} />
             <div className='col center'>

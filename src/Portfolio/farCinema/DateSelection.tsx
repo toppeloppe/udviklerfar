@@ -1,3 +1,5 @@
+import { DateCalendar, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import * as React from 'react';
 
 export interface IDateSelectionProps {
@@ -9,16 +11,12 @@ export interface IDateSelectionProps {
 export const DateSelection: React.FunctionComponent<IDateSelectionProps> = (props: React.PropsWithChildren<IDateSelectionProps>) => {
   return (
     <>
-<div>
-      <h2>Select Date for {props.movie.title}</h2>
-      <ul>
-        {props.availableDates.map((date) => (
-          <li key={date}>
-            <button onClick={() => props.onSelect(date)}>{date}</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+      <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
+        <h2>1. Vælg dato</h2>
+        <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale='da'>
+          <DateCalendar onChange={props.onSelect}></DateCalendar>
+        </LocalizationProvider>
+      </div>
     </>
   );
 };

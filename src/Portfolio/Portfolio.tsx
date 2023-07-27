@@ -50,7 +50,7 @@ export const Portfolio: React.FunctionComponent<IPortfolioProps> = (props: React
                 {portFolios.map(portfolio =>
                     <div className='portfolioBox'>
                         {/* <img height={150} src={portfolio.image}></img> */}
-                        <div className={`portfolioImage ${portfolio.inDevelopment ? 'inDevelopment' : ''}`} style={{background: `url(${portfolio.image})`}} ></div>
+                        <div className={`portfolioImage ${portfolio.inDevelopment ? 'inDevelopment' : ''}`} style={{backgroundImage: `url(${portfolio.image})`}} ></div>
                         <div className='information'>
 
                             <h4>{portfolio.Title}</h4>

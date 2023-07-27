@@ -1,0 +1,262 @@
+:root {
+    --white: #fefefe;
+    --background: #222f3e;
+}
+
+.FarCinema {
+    // background-color: red;
+    font-family: "Lato";
+    background: var(--background);
+    position: absolute;
+    display: flex;
+    color: var(--white);
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    .header {
+        h1 {
+            text-align: center;
+            font-size: 40px;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+    }
+
+    [class*="indiana-scroll-container"] {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        margin: 20px;
+        padding: 20px 50px;
+        // overflow: auto;
+        // scroll-behavior: smooth;
+        cursor: grab;
+        margin: 0 auto;
+        width: 70%;
+
+        .movie {
+            // background-color: blue;
+            box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.5);
+            color: var(--background);
+            min-width: 250px;
+            border-radius: 10px 10px;
+            background-color: var(--white);
+            cursor: pointer;
+            transition: .2s all ease-in-out !important;
+
+            .moviePoster {
+                border-radius: 10px 10px 0 0;
+            }
+
+            .movieInfo {
+                padding: 20px;
+                margin: 0;
+                font-size: large;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+
+            &:hover {
+                box-shadow: 2px 2px 15px 0 rgba(255, 255, 255, 1);
+            }
+
+            &.movieSelected {
+                min-width: 100%;
+
+                .moviePoster {
+                    border-radius: 10px 0;
+                }
+            }
+        }
+    }
+    .movie {
+        // background-color: blue;
+        box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.5);
+        color: var(--background);
+        min-width: 250px;
+        border-radius: 10px 10px;
+        background-color: var(--white);
+        // cursor: pointer;
+        transition: .2s all ease-in-out !important;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        .moviePoster {
+            border-radius: 10px 10px 0 0;
+        }
+
+        .movieInfo {
+            padding: 20px;
+            margin: 0;
+            font-size: 30px;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        &:hover {
+            box-shadow: 2px 2px 15px 0 rgba(255, 255, 255, 1);
+        }
+
+        &.movieSelected {
+            width: 80%;
+            height: 80%;
+            margin: 0 auto;
+            box-shadow: 0 0 30px 0 rgba(255, 255, 255, .5), 0 0 5px 0 rgba(255, 255, 255, 1);
+            .moviePoster {
+                border-radius: 10px 0 0 10px;
+            }
+        }
+    }
+
+    .movieHelper {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .chair {
+        display: block;
+        position: relative;
+        background: var(--background);
+
+        .back {
+            width: 35px;
+            height: 11px;
+            position: absolute;
+            display: block;
+            border-radius: 5px;
+            bottom: -6px;
+            left: -5px;
+        }
+
+        .seat {
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            display: block;
+            position: relative;
+
+            &::before {
+                content: "";
+                width: 7px;
+                height: 25px;
+                border-radius: 5px;
+                position: absolute;
+                display: block;
+                left: -7px;
+                top: -5px;
+                // rotate: -2deg;
+            }
+
+            &::after {
+                content: "";
+                width: 7px;
+                height: 25px;
+                border-radius: 5px;
+                position: absolute;
+                display: block;
+                right: -7px;
+                top: -5px;
+                // rotate: 2deg;
+            }
+        }
+
+        &:not(.booked):not(.selected) {
+            .back {
+                border: 2px solid var(--background);
+                background: var(--white);
+            }
+
+            .seat {
+                background: var(--white);
+                border: 2px solid var(--background);
+
+                &::before {
+                    border: 2px solid var(--background);
+                    background: var(--white);
+                }
+
+                &::after {
+                    border: 2px solid var(--background);
+                    background: var(--white);
+                }
+            }
+        }
+
+        &.booked {
+            .back {
+                border: 2px solid var(--white);
+                background: var(--background);
+            }
+
+            .seat {
+                background: var(--background);
+                border: 2px solid var(--white);
+
+                &::before {
+                    border: 2px solid var(--white);
+                    background: var(--background);
+                }
+
+                &::after {
+                    border: 2px solid var(--white);
+                    background: var(--background);
+                }
+            }
+            
+        }
+        &.selected {
+            .back {
+                border: 2px solid var(--white);
+                background: green;
+            }
+
+            .seat {
+                background: green;
+                border: 2px solid var(--white);
+
+                &::before {
+                    border: 2px solid var(--white);
+                    background: green;
+                }
+
+                &::after {
+                    border: 2px solid var(--white);
+                    background: green;
+                }
+            }
+        }
+
+        &:hover {
+            .back {
+                border: 2px solid var(--background);
+                background: var(--white);
+            }
+
+            .seat {
+                background: var(--white);
+                border: 2px solid var(--background);
+
+                &::before {
+                    border: 2px solid var(--background);
+                    background: var(--white);
+                }
+
+                &::after {
+                    border: 2px solid var(--background);
+                    background: var(--white);
+                }
+            }
+        }
+    }
+
+    .cinemaWrapper {
+        border: 2px solid var(--background);
+        display: block;
+        position: relative;
+        height: 100%;
+    }
+}
