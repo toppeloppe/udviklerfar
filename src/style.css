@@ -86,6 +86,9 @@ a.card{display:block}
 .case-page .solution{background:var(--surface);border-left:6px solid var(--b)}
 .case-page .tech{background:#12141f;border-left:6px solid var(--a)}
 .tech-group{margin-top:20px}
+.notice{display:flex;gap:12px;align-items:flex-start;max-width:70ch;margin:16px 0;padding:14px 16px;border-radius:12px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.45);border-left:4px solid #f59e0b;color:var(--text)}
+.notice .icon{width:1.4em;height:1.4em;margin-top:1px;color:#f59e0b}
+.notice p{margin:0;font-size:.95rem;line-height:1.5}
 .tech-group h3{margin:0 0 8px;font-size:1rem;color:var(--a)}
 .step{display:inline-block;font-weight:800;font-size:.85rem;letter-spacing:.14em;color:var(--b);margin-bottom:6px}
 .problem .step{color:#f87171}.tech .step{color:var(--a)}

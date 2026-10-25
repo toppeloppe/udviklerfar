@@ -1,5 +1,6 @@
 import { cases } from '../cases'
 import Icon from '../components/Icon'
+import Notice from '../components/Notice'
 
 const facebook = 'M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z'
 const linkedin = 'M4 9h4v11H4zM6 4a2 2 0 1 0 0 .01M10 9h4v2c1-2 6-3 6 2v7h-4v-6c0-2-2-2-2 0v6h-4z'
@@ -67,7 +68,8 @@ export default function Home() {
 
         <section id="Cases" className="container">
           <h2 className="sektionNavn">Cases</h2>
-          <p className="muted">Størstedelen af mine løsninger er udviklet til SharePoint og B2B-shops bag login og kan derfor ikke vises offentligt. I stedet bygger jeg egne cases med fiktivt indhold, 100% fra bunden. Kildekoden til alle cases kan findes på GitHub.</p>
+          <p className="muted">Størstedelen af mine løsninger er udviklet til SharePoint, portaler og B2B-shops bag login og kan derfor ikke vises offentligt. I stedet viser jeg udvalgte cases, der fremviser mine evner, genskabt med fiktivt indhold og 100% fra bunden. Kildekoden til alle cases kan findes på GitHub.</p>
+          <Notice>Dette er simplificerede Proof of Concepts, der genskaber udvalgte UX-mønstre og kernefunktionaliteter fra komplekse B2B-løsninger, jeg tidligere har bygget. Alt indhold, design og kildekode er lavet 100% fra bunden til denne portfolio og indeholder ingen proprietær kode, kildedata eller fortrolige forretningslogikker.</Notice>
           <p><a className="btn ghost" target="_blank" rel="noopener" href="https://github.com/toppeloppe/udviklerfar/tree/main/src">Se alle cases på GitHub</a></p>
           <div className="grid2">
             {cases.map(c => (
