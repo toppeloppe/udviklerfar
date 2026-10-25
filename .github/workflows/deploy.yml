@@ -18,9 +18,9 @@ jobs:
       - run: npm run build
       - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ ftp.udviklerfar.dk }}
-          username: ${{ Torben@udviklerfar.dk }}
-          password: ${{ !Ld98hAUkFtbdN2 }}
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           local-dir: dist/
           server-dir: ${{ secrets.FTP_DIR || 'public_html/' }}
