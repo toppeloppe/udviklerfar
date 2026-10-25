@@ -229,12 +229,12 @@ export default function BulkPurchase() {
                         onClick={e => set(r.id, s, get(r.id, s) + (e.shiftKey ? -1 : 1))}
                         onContextMenu={e => { e.preventDefault(); set(r.id, s, get(r.id, s) - 1) }}
                       >
-                        {get(r.id, s)}
+                        {get(r.id, s) || ''}
                       </button>
                     ) : (
                       <input
                         type="number" min={0} max={stock(r.id, s)} aria-label={`${r.title} ${s}`}
-                        value={get(r.id, s) || ''} placeholder="0"
+                        value={get(r.id, s) || ''}
                         onChange={e => set(r.id, s, parseInt(e.target.value) || 0)}
                       />
                     )}
