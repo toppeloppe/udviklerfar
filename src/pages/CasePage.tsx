@@ -7,7 +7,7 @@ const desktop = 'M3 4h18v12H3zM8 20h8M12 16v4'
 const mobile = 'M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM11 18h2'
 
 export default function CasePage({ data }: { data: CaseData }) {
-  const { title, tags, problem, solution, tech, source, Demo } = data
+  const { title, tags, problem, solution, tech, source, noDeviceToggle, note, legend, Demo } = data
   const [isMobile, setIsMobile] = useState(false)
 
   return (
@@ -35,11 +35,19 @@ export default function CasePage({ data }: { data: CaseData }) {
           <span className="step">02</span>
           <h2>Løsning</h2>
           {solution.map(p => <p key={p}>{p}</p>)}
-          <div className="device-toggle">
-            <button className={`btn ghost${!isMobile ? ' on' : ''}`} onClick={() => setIsMobile(false)}><Icon d={desktop} />Desktop</button>
-            <button className={`btn ghost${isMobile ? ' on' : ''}`} onClick={() => setIsMobile(true)}><Icon d={mobile} />Mobil</button>
-          </div>
-          <div className={`case-demo${isMobile ? ' mobile' : ''}`}><Demo /></div>
+          {!noDeviceToggle && (
+            <div className="device-toggle">
+              <button className={`btn ghost${!isMobile ? ' on' : ''}`} onClick={() => setIsMobile(false)}><Icon d={desktop} />Desktop</button>
+              <button className={`btn ghost${isMobile ? ' on' : ''}`} onClick={() => setIsMobile(true)}><Icon d={mobile} />Mobil</button>
+            </div>
+          )}
+          <div className={`case-demo${isMobile && !noDeviceToggle ? ' mobile' : ''}`}><Demo /></div>
+          {legend && (
+            <ul className="demo-legend">
+              {legend.map(l => <li key={l.label}><span style={{ background: l.color }} />{l.label}</li>)}
+            </ul>
+          )}
+          {note && <p className="demo-note">{note}</p>}
         </div>
       </section>
 
