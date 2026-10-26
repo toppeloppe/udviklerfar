@@ -68,7 +68,7 @@ export default function Home() {
 
         <section id="Cases" className="container">
           <h2 className="sektionNavn">Cases</h2>
-          <p className="muted">Størstedelen af mine løsninger er udviklet til SharePoint, portaler og B2B-shops bag login og kan derfor ikke vises offentligt. I stedet viser jeg udvalgte cases, der fremviser mine evner, genskabt med fiktivt indhold og 100% fra bunden. Kildekoden til alle cases kan findes på GitHub.</p>
+          <p className="muted">Størstedelen af mine løsninger er udviklet til SharePoint, portaler og B2B-shops bag login og kan derfor ikke vises offentligt. I stedet viser jeg udvalgte cases, der fremviser mine evner, genskabt med fiktivt indhold og 100% fra bunden, samt en live hjemmeside, jeg har lavet til Ikast Børnefestival. Kildekoden til cases med demo kan findes på GitHub.</p>
           <Notice>Dette er simplificerede Proof of Concepts, der genskaber udvalgte UX-mønstre og kernefunktionaliteter fra komplekse B2B-løsninger, jeg tidligere har bygget. Alt indhold, design og kildekode er lavet 100% fra bunden til denne portfolio og indeholder ingen proprietær kode, kildedata eller fortrolige forretningslogikker.</Notice>
           <p><a className="btn ghost" target="_blank" rel="noopener" href="https://github.com/toppeloppe/udviklerfar/tree/main/src">Se alle cases på GitHub</a></p>
           <div className="grid2">

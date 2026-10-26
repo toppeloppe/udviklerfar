@@ -189,6 +189,11 @@ a.card{display:block}
 .pt-views button{margin-left:6px}
 .pt-bar button.on{background:var(--b);color:#fff;border-color:var(--b)}
 .demo-note{margin-top:12px;font-size:.9rem;color:var(--muted)}
+.intro-band .btn+.btn{margin-left:10px}
+.bf{display:flex;align-items:flex-start;justify-content:center;gap:16px;padding:16px;background:var(--surface)}
+.bf img{display:block;border-radius:10px;border:1px solid var(--line);height:auto}
+.bf-desktop{flex:1 1 0;min-width:0}
+.bf-mobil{flex:0 0 22%;max-width:200px}
 .demo-legend{list-style:none;display:flex;flex-wrap:wrap;gap:8px 20px;margin:14px 0 0;padding:0;font-size:.9rem}
 .demo-legend li{display:flex;align-items:center;gap:8px}
 .demo-legend span{width:16px;height:16px;border-radius:3px;border:1px solid rgba(255,255,255,.25)}
