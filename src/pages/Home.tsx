@@ -23,6 +23,31 @@ const education = [
 
 const traits = ['Selvstændig & Teamworker', 'Løsningsorienteret', 'Positivt mindset', 'Udadvendt & engageret']
 
+const download = 'M12 3v12M7 10l5 5 5-5M4 20h16'
+
+const references = [
+  {
+    company: 'TRIMIT',
+    from: 'Jacob Mosegaard, Head of E-commerce',
+    file: '/anbefalinger/trimit-udtalelse.pdf',
+    quotes: [
+      'Torben er en kreativ udvikler med flair for æstetik og brugervenlighed, idet han formår at sætte sig i brugerens sted.',
+      'Han tænker ud over de vante rammer, udfordrer gerne status quo og kommer med kreative løsninger på både store og små problemstillinger.',
+      'Han har ad flere omgange haft direkte kundekontakt, hjulpet kunderne godt på vej samt taget ansvar for oplæring af kundernes medarbejdere.',
+    ],
+  },
+  {
+    company: 'EVOBIS',
+    from: 'Bjarke Røjgaard Jensen, Driftsansvarlig',
+    file: '/anbefalinger/evobis-anbefaling.pdf',
+    quotes: [
+      'En ihærdig medarbejder, der samtidig har bidraget til den positive stemning på kontoret.',
+      'Torben har igennem hele ansættelsen haft lysten til at lære nye ting og har ikke været bleg for at bidrage til en dialog omkring en løsning.',
+      'Torben har hos Evobis haft stor frihed til at administrere egne opgaver og koordinere indsatsen med kunderne.',
+    ],
+  },
+]
+
 export default function Home() {
   return (
     <main>
@@ -78,6 +103,20 @@ export default function Home() {
                 <p>{c.summary}</p>
                 <div className="tags chips">{c.tags.map(t => <span className="pill" key={t}>{t}</span>)}</div>
               </Link>
+            ))}
+          </div>
+        </section>
+
+        <section id="Anbefalinger" className="container">
+          <h2 className="sektionNavn">Anbefalinger</h2>
+          <div className="grid2">
+            {references.map(r => (
+              <article className="card ref" key={r.company}>
+                <p className="company">{r.company}</p>
+                {r.quotes.map(q => <blockquote key={q}>{q}</blockquote>)}
+                <p className="from">{r.from}</p>
+                <a className="btn ghost" href={r.file} download><Icon d={download} />Hent som PDF</a>
+              </article>
             ))}
           </div>
         </section>
